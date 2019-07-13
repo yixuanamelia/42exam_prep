@@ -1,0 +1,35 @@
+Assignment name  : string_distance
+Expected files   : string_distance.c
+Allowed functions: everything
+--------------------------------------------------------------------------------
+
+Notice: This exercise will not be graded.
+
+Complete the following string_distance.c file given with this assignment. This
+file is a program who should take two arguments that are strings and try to 
+calculate the distance between those two.
+
+The distance between two strings is a metric for measuring the difference 
+between two sequences ( repetitions, placement, alignment... ). A distance is 
+always measured between 0 and 1 ( use float to compute this kind of numbers ).
+The closer the words are, the higher the value.
+
+For example:
+- ‘rome’ and ‘pope’ will have a higher distance value than ‘rome‘ and ‘chair’
+- ‘hair’ and ‘fair’ will have a higher distance value than ‘hair‘ and ‘tear’
+- ‘notebook’ and ‘playbook’ will have a higher distance value than ‘notebook‘ and ‘elephant’
+
+The program should return a float greater than 0 depending on the distance 
+between the two strings and outputs 0 if the distance is the same.
+
+A example of pseudo algorithm to perform the task may look like:
+
+Let len1, len2 the length of string1 and string2;
+Let total_distance=0;
+For each c1 and c2, characters of string1 and string2 in the same position:
+    1) Find a way to score the distance between the two characters (you may think of  different ways to do this).
+    2) Add this value to the total distance.
+return total_distance;
+
+You can build your own if you want.
+Be creative !
