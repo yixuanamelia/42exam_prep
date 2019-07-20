@@ -1,27 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-int		ft_atoi(const char *str)
+int		ft_isspace(int c)
 {
-	int		i;
+	return (( 9 <= c && c <= 13) || c == 32);
+}
+
+int		ft_atoi(char *str)
+{
 	int		nbr;
 	int		sign;
 
 	nbr = 0;
 	sign = 1;
 
-	if (str == '\0')
-		return (0);
-	while (*str && (*str == '\f' || *str == '\n' || *str == '\t' || *str == '\v' || *str == ' ' || *str == '\r'))
+	while (ft_isspace(*str))
 		str++;
 	if (*str == '-')
 		sign = -1;
-	if (*str == '-' || *str == '+')
+	if (*str == '+' || *str == '-')
 		str++;
-	while (*str && *str >= '0' && *str <= '9')
-	{
-		nbr = (nbr * 10) + (*str - '0');
-		str++;
-	}
+	while (*str >= '0' && *str <= '9')
+		nbr = (nbr * 10) + (*str++ - '0');
 	return (nbr * sign);
 }
 

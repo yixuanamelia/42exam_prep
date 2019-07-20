@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 char	**ft_split(char *str)
 {
 	int		i;
@@ -27,5 +26,17 @@ char	**ft_split(char *str)
 		k++;
 	}
 	split[k] = NULL;
+	printf("str = %s\n", str);
+	printf("0 %s\n", split[0]);
+	printf("1 %s\n", split[1]);
+	printf("2 %s\n", split[2]);
+	printf("3 %s\n", split[3]);
+	printf("4 %s\n", split[4]);
 	return (split);
+}
+
+int		main(int ac, char **av)
+{
+	ft_split("you are awesome that's right");
+	return 0;
 }
