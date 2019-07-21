@@ -5,35 +5,29 @@ int		ft_atoi(char *str)
 	int i;
 	int nbr;
 
-	i = 0;
 	nbr = 0;
-	if (str[i] == '-')
+	if (*str == '-')
 		return (0);
-	while (str[i] != '\0')
+	while (*str != '\0')
 	{
-		if (!(str[i] >= 48 && str[i] <= 57))
+		if (!(*str >= 48 && *str <= 57))
 			return (0);
-		nbr = nbr * 10;
-		nbr = nbr + (str[i] - 48);
+		nbr = (nbr * 10) + (*str++ - 48);
 		i++;
 	}
 	return (nbr);
 }
 
-void	ft_putnbr(int nbr)
+void	ft_putchar(char c)
 {
-	char c;
+	write(1, &c, 1);
+}
 
-	if (nbr >= 10)
-	{
-		ft_putnbr(nbr / 10);
-		ft_putnbr(nbr % 10);
-	}
-	else
-	{
-		c = nbr + '0';
-		write(1, &c, 1);
-	}
+void	ft_putnbr(int n)
+{
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + 48);
 }
 
 int		ft_is_prime(int nbr)
