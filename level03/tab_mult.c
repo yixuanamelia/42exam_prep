@@ -6,65 +6,57 @@
 /*   By: yiwang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:32:33 by yiwang            #+#    #+#             */
-/*   Updated: 2019/07/13 15:32:35 by yiwang           ###   ########.fr       */
+/*   Updated: 2019/07/21 18:12:52 by yiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+int		ft_isspace(int c)
+{
+	return (( 9 <= c && c <= 13) || c == 32);
+}
+
 int		ft_atoi(char *str)
 {
-	int		i;
 	int		nbr;
 	int		sign;
 
-	if (!str)
-		return (0);
-	i = 0;
-	sign = 1;
 	nbr = 0;
-	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' ||  \
-		str[i] == ' ' || str[i] == '\r' || str[i] == '\f')
-		i += 1;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
-			sign *= -1;
-	while (str[i] && str[i] >= '0' && '9' >= str[i])
-		nbr = (nbr * 10) + (str[i++] - '0');
+	sign = 1;
+
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
+		sign = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		nbr = (nbr * 10) + (*str++ - '0');
 	return (nbr * sign);
 }
 
-void	ft_putnbr(int nbr)
+void	ft_putchar (char c)
 {
-	char	c;
-
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		write(1, "-", 1);
-	}
-	if (nbr < 10)
-	{
-		c = nbr + '0';
-		write(1, &c, 1);
-	}
-	else
-	{
-		ft_putnbr(nbr / 10);
-		ft_putnbr(nbr % 10);
-	}
+	write(1, &c, 1);
 }
-int		main(int argc, char *argv[])
+
+void	ft_putnbr(int n)
+{
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + '0');
+}
+
+int		main(int ac, char **av)
 {
 	int		i;
 	int		nbr;
 
-	if (argc != 2)
-		write(1, "\n", 1);
-	else
+	if (ac ==  2)
 	{
 		i = 1;
-		nbr = ft_atoi(argv[1]);
+		nbr = ft_atoi(av[1]);
 		while (i <= 9)
 		{
 			ft_putnbr(i);
@@ -76,5 +68,6 @@ int		main(int argc, char *argv[])
 			i += 1;
 		}
 	}
+	write(1, "\n", 1);
 	return (0);
 }
