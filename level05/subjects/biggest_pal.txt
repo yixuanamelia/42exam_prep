@@ -4,7 +4,7 @@ Allowed functions: write
 --------------------------------------------------------------------------------
 
 Write a program named biggest_pal that takes a string as argument and prints the
-biggest palindrome included inside this string, followed by a newline.
+biggest palindrome included inside this string, followed by a newline. 
 
 This string contains only lowercase characters.
 
@@ -19,13 +19,17 @@ $> biggest_pal "abcba"
 abcba
 $> biggest_pal "aaaaaaaaaabbcbbaaaa"
 aaaabbcbbaaaa
+$> biggest_pal "ohanameansfamilyfamilymeansnobodygetleftbehindorforgotten"
+obo
 $> biggest_pal "aooibdaoiwhoihwdoinzeldaisaboyobasiadlezfdsfnslk"
 zeldaisaboyobasiadlez
 $> biggest_pal "aeibaabaammaabaalek"
 aabaammaabaa
+$> biggest_pal youpi
+i
 $> biggest_pal abeb qpinqwjobo qkmnwoiq
 
 $> biggest_pal
 
 $>
-
+ 

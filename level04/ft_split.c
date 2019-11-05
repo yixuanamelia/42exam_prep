@@ -4,28 +4,39 @@
 char	**ft_split(char *str)
 {
 	int		i;
-	int		j;
-	int		k;
+	int		a;
+	int		b;
 	char	**split;
 
 	i = 0;
-	k = 0;
+	a = 0;
+	b = 0;
 	if (!(split = (char **)malloc(sizeof(char *) * 256)))
 		return (NULL);
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 		i++;
 	while (str[i])
 	{
-		j = 0;
-		if (!(split[k] = (char *)malloc(sizeof(char) * 4096)))
+		if (!(split[a] = malloc(sizeof(char*) * 4096)))
 			return (NULL);
-		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i])
-			split[k][j++] = str[i++];
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+			split[a][b++] = str[i++];
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		split[k][j] = '\0';
-		k++;
+		split[a][b] = '\0';
+		a++;
+		b = 0;
 	}
-	split[k] = NULL;
+	printf("str: %s\n", str);
+	printf("0: %s\n", split[0]);
+	printf("1: %s\n", split[1]);
+	printf("2: %s\n", split[2]);
+	printf("3: %s\n", split[3]);
 	return (split);
+}
+
+int		main(int ac, char **av)
+{
+	ft_split("This is a deal");
+	return 0;
 }

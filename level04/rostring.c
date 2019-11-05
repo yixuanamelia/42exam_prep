@@ -6,7 +6,7 @@
 /*   By: yiwang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 15:34:24 by yiwang            #+#    #+#             */
-/*   Updated: 2019/07/13 15:34:26 by yiwang           ###   ########.fr       */
+/*   Updated: 2019/08/08 14:55:43 by yiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 int		main(int argc, char *argv[])
 {
 	int		i;
-	int		j;
 	int		k;
 
 	if (argc > 1)
 	{
 		i = 0;
-		j = 0;
 		while (argv[1][i] == ' ' || argv[1][i] == '\t')
 			i += 1;
 		k = i;
-		while (argv[1][i] && argv[1][i] != ' ' && argv[1][i] != '\t')
+		while (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t'))
 			i += 1;
 		while (argv[1][i])
 		{

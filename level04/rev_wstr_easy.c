@@ -7,12 +7,12 @@ void	rev_wstr(char *str, int first)
 	int		i;
 
 	i = 0;
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 		i++;
 	if (!str[i])
 		return;
 	start = i;
-	while (str[i] && str[i] != ' ')
+	while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 		i++;
 	rev_wstr(str + i, 0);
 	write(1, str + start, i - start);
