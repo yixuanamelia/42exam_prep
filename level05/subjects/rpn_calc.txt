@@ -1,11 +1,11 @@
 Assignment name  : rpn_calc
-Expected files   : *.c, *.h
+Expected files   : *.c, *.h 
 Allowed functions: atoi, printf, write, malloc, free
 --------------------------------------------------------------------------------
 
 Write a program that takes a string which contains an equation written in
 Reverse Polish notation (RPN) as its first argument, evaluates the equation, and
-prints the result on the standard output followed by a newline.
+prints the result on the standard output followed by a newline. 
 
 Reverse Polish Notation is a mathematical notation in which every operator
 follows all of its operands. In RPN, every operator encountered evaluates the
