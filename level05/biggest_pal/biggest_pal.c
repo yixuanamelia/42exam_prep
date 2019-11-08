@@ -1,54 +1,84 @@
 #include <unistd.h>
+#include "biggest_pal.h"
 
-int ft_strlen(const char *str)
+int		ft_strlen(char *str)
 {
-	int cnt = 0;
-
-	while(str[cnt])
-		cnt++;
-	return (cnt);
+	int i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
-int find_pal(const char *str, int cnt1)
+void		ft_putstr(char *str)
 {
-	int tmp1, tmp2;
-	int r_cnt = 0;
-	int r_dist = 0;
-	int str_len;
-	int dist;
-
-	str_len = ft_strlen(str);
-	while (str[cnt1])
-	{	
-		dist = 1;
-		while (cnt1 + dist < str_len)
-		{
-			if (str[cnt1] == str[cnt1 + dist])
-			{
-				tmp1 = cnt1;
-				tmp2 = cnt1 + dist;
-				while(tmp2 - tmp1 > 2 && str[tmp1] == str[tmp2])
-				{
-					tmp1++;
-					tmp2--;
-				}
-				if (tmp2 - tmp1 <= 2 && dist > r_dist)
-				{
-					r_cnt = cnt1;
-					r_dist = dist + 1;
-				}
-			}
-			dist++;
-		}
-		cnt1++;
+	int i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
 	}
-	write(1, &str[r_cnt], r_dist);
-	return (0);
 }
 
-int main (int argc, const char *argv[])
+void		pal(char *str)
 {
-	if (argc == 2)
-		find_pal(argv[1], 0);
-	write(1, "\n", 1);
+	t_pal	pal;
+	t_pal	count;
+	t_pal	old;
+	int		i = 0;
+	int		max;
+
+	count.end = ft_strlen(str) - 1;
+	max = count.end;
+	while (str[i] != '\0')
+	{
+		count.length = 1;
+		count.start = i;
+		old.start = i;
+		old.end = count.end;
+		max = count.end;
+		while (str[count.start] == str[count.end])
+		{
+			if (count.start == count.end || count.start + 1 == count.end)
+			{
+				if (old.end - old.start >= pal.length)
+				{
+					pal.start = old.start;
+					pal.end = old.end + 1;
+					pal.length = old.end - old.start;
+				}
+				break ;
+			}
+			count.length++;
+			count.start++;
+			count.end--;
+		}
+		count.start = old.start;
+		count.end = old.end;
+		if (max == pal.length)
+			break ;
+		if (str[i + 1] == '\0' && count.end > 0)
+		{
+			count.end--;
+			i = -1;
+		}
+		i++;
+	}
+	if (pal.length == 0)
+	{
+		ft_putstr(&str[ft_strlen(str) - 1]);
+		return ;
+	}
+	str[pal.end] = '\0';
+	ft_putstr(&str[pal.start]);
+}
+
+int			main(int ac, char **av)
+{
+
+	if (ac == 2)
+	{
+		pal(av[1]);
+	}
+	ft_putstr("\n");
+	return (0);
 }
