@@ -35,7 +35,7 @@ char	**ft_split(char *str)
 	return (split);
 }
 
-int		main(int ac, char **av)
+int		main(void)
 {
 	ft_split("This is a deal");
 	return 0;
