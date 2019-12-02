@@ -1,85 +1,80 @@
-#include "rpn_calc.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-void	rpn_calc(char *s)
+void	check_space(char *s, int *i)
 {
-	t_s	**stack;
-	int		num1;
-	int		num2;
+	int j;
 
-	if (!(stack = (t_s **)malloc(sizeof(t_s*))))
-		return;
-	while (*s)
+	j = *i;
+	while (s[j] == ' ')
+		j++;
+	*i = j;
+}
+
+void	skip_num(char *s, int *i)
+{
+	int j;
+
+	j = *i;
+	while (s[j] >= '0' && s[j] <= '9')
+		j++;
+	*i = j;
+}
+
+int		opt(int a, char op, int b)
+{
+	int	res;
+	
+	res = 0;
+	if (op == '+')
+		return (a + b);
+	if (op == '-')
+		return (a - b);
+	if (op == '/')
+		return (a / b);
+	if (op == '%')
+		return (a % b);
+	if (op == '*')
+		return (a * b);
+	return (00);
+}
+
+int		rpn_calc(char *s)
+{
+	int	tab[10000];
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 0;
+	while (s[++i])
 	{
-		while (*s && is_space(*s))
-			s++;
-		if (*s && is_digit(*s))
+		check_space(s, &i);
+		if ((s[i] >= '0' && s[i] <= '9') ||	((s[i] == '+' || s[i] == '-') &&
+			(s[i + 1] >= '0' && s[i + 1] <= '9')))
 		{
-			push(stack, atoi(s));
-			while (*s && is_digit(*s))
-				s++;
+			tab[j++] = atoi(&s[i++]);
+			skip_num(s, &i);
 		}
-		else if(*s && is_op(*s))
+		if (((s[i] == '-' || s[i] == '+') && (s[i + 1] == ' ' ||
+			s[i + 1] == '\0')) || s[i] == '/' || s[i] == '*' || s[i] == '%')
 		{
-			if (*(s + 1) && is_digit(*(s + 1)))
-			{
-				push(stack, atoi(s));
-				s++;
-				while (is_digit(*s))
-					s++;
-			}
-			else{
-				num1 = pop(stack);
-				num2 = pop(stack);
-				if (num2 == 0 && (*s == '/' || *s== '%'))
-				{
-					printf("Error\n");
-					return;
-				}
-				push(stack, do_op(num1, num2, *s));
-				s++;
-			}
+			if (j < 1 || ((s[i] == '%' || s[i] == '/') && tab[j - 1] == 0))
+				return (printf("Error\n"));
+			tab[j - 2] = opt(tab[j - 2], s[i], tab[j - 1]);
+			j--;
 		}
 	}
-	printf("%i\n", (*stack)->i);
+	if (j != 1)
+		return (printf("Error\n"));
+	return (printf("%d\n", tab[0]));
 }
 
-void	push(t_s **stack, int i)
+int		main(int ac, char **av)
 {
-	t_s	*link;
-
-	if (!(linkk = (t_s *)malloc(sizeof(t_s))))
-		return;
-	link->i = i;
-	if (*stack)
-	{
-		link->next = *stack;
-		*stack = link;
-	}
-}
-
-int		pop(t_s **stack)
-{
-	int		num;
-	t_s *tmp;
-
-	num= (*stack)->i;
-	tmp = (*stack);
-	*stack = (*stack)->next;
-	free(tmp);
-	return (num);
-}
-
-int		do_op(int i, int j, char c)
-{
-	if (c == '+)
-		return (i + j);
-	else if (c == '-')
-		return (i - j);
-	else if (c == '*')
-		return (i * j);
-	else if (c == '%')
-		return (i % j);
-	else if (c == '/')
-		return (i / j);
-	return (0);
+	if (ac != 2)
+		return (printf("Error\n"));
+	rpn_calc(av[1]);
+	return (00);
 }
