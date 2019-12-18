@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 
 void print_pal(char *s, int low, int high)
 {
@@ -17,12 +18,12 @@ void biggest_pal(char *s)
 
 	len = 0;
 	while (s[len])
-		len++;
-	i = 1;
-	max_len = 1;
+		len++; /*calculate the length of the string */
+	i = 1; /*length variable */
+	max_len = 1; /*if there is one char only */
 	while (++i < len)
-	{ 
-		low = i - 1;
+	{
+		low = i - 1; /*the first character of the argument */
 		high = i;
 		while (low >= 0 && high < len && s[low] == s[high])
 		{
@@ -30,6 +31,7 @@ void biggest_pal(char *s)
 			{
 				start = low;
 				max_len = high - low + 1;
+				printf("1 : %d\n", max_len);
 			}
 			--low;
 			++high;
@@ -42,6 +44,7 @@ void biggest_pal(char *s)
 			{
 				start = low;
 				max_len = high - low + 1;
+				printf("2 : %d\n", max_len);
 			}
 			--low;
 			++high;
