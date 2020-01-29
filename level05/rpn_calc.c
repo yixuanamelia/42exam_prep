@@ -37,7 +37,7 @@ int		opt(int a, char op, int b)
 		return (a % b);
 	if (op == '*')
 		return (a * b);
-	return (00);
+	return (0);
 }
 
 int		rpn_calc(char *s)
@@ -76,5 +76,5 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (printf("Error\n"));
 	rpn_calc(av[1]);
-	return (00);
+	return (0);
 }
